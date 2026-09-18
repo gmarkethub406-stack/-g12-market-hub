@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "G12 Market Hub",
+    "slug": "g12-market-hub",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
