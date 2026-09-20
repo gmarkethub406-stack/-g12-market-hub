@@ -1,1 +1,13 @@
 .eas/workflows/deploy-web.yml
+name: Deploy G12 Market Hub
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  deploy_web:
+    name: Deploy G12 Market Hub Web
+    type: deploy
+    params:
+      prod: true
