@@ -9,3 +9,11 @@
     }
   }
 }
+"firebase": "^12.2.1",
+"react": "19.0.0",
+"dependencies": {
+  "expo": "^53.0.0",
+  "firebase": "^12.2.1",
+  "react": "19.0.0",
+  "react-native": "0.79.2"
+}
