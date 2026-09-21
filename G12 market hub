@@ -1,0 +1,89 @@
+import React, { useMemo, useState } from "react";
+import { SafeAreaView, View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet, StatusBar } from "react-native";
+
+const CATEGORIES = ["All", "Electronics", "Fashion", "Cars & Parts", "Home", "Agriculture", "Property", "Services"];
+const PRODUCTS = [
+  { id:"p1", title:"Smartphone", category:"Electronics", price:"₦285,000", emoji:"📱", location:"Lagos, Nigeria" },
+  { id:"p2", title:"Classic Sneakers", category:"Fashion", price:"₦38,000", emoji:"👟", location:"Enugu, Nigeria" },
+  { id:"p3", title:"Car spare parts", category:"Cars & Parts", price:"Contact seller", emoji:"🚗", location:"Abuja, Nigeria" },
+  { id:"p4", title:"Modern home chair", category:"Home", price:"₦95,000", emoji:"🪑", location:"Port Harcourt, Nigeria" },
+  { id:"p5", title:"Farm produce", category:"Agriculture", price:"Contact seller", emoji:"🌾", location:"Enugu, Nigeria" },
+  { id:"p6", title:"Land listing", category:"Property", price:"Contact seller", emoji:"🏡", location:"Lagos, Nigeria" },
+  { id:"p7", title:"Website design", category:"Services", price:"Request a quote", emoji:"💻", location:"Online" }
+];
+
+export default function App() {
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("All");
+  const [screen, setScreen] = useState("market");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [notice, setNotice] = useState("");
+  const results = useMemo(() => PRODUCTS.filter(p =>
+    (category === "All" || p.category === category) &&
+    `${p.title} ${p.category} ${p.location}`.toLowerCase().includes(query.toLowerCase())
+  ), [query, category]);
+
+  return <SafeAreaView style={s.safe}>
+    <StatusBar barStyle="light-content" backgroundColor="#075d2b" />
+    <View style={s.header}>
+      <Text style={s.brand}>G12 <Text style={s.brandLight}>Market Hub</Text></Text>
+      <Text style={s.tagline}>BUY • SELL • BUILD • CONNECT</Text>
+      <View style={s.nav}>
+        <TouchableOpacity onPress={() => {setScreen("market");setNotice("");}}><Text style={s.navText}>Marketplace</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => {setScreen("sell");setNotice("");}}><Text style={s.navText}>Sell on G12</Text></TouchableOpacity>
+      </View>
+    </View>
+    <ScrollView contentContainerStyle={s.content} keyboardShouldPersistTaps="handled">
+      {screen === "market" ? <>
+        <View style={s.hero}>
+          <Text style={s.heroEyebrow}>WELCOME TO G12</Text>
+          <Text style={s.heroTitle}>Everything you need.{'\n'}One marketplace.</Text>
+          <Text style={s.heroCopy}>Discover products, services and digital solutions. Find what you need and connect with sellers.</Text>
+          <TouchableOpacity style={s.goldButton} onPress={() => setScreen("sell")}><Text style={s.goldText}>Become a Seller →</Text></TouchableOpacity>
+        </View>
+        <TextInput value={query} onChangeText={setQuery} placeholder="Search products, services or categories…" placeholderTextColor="#68766e" style={s.search}/>
+        <Text style={s.sectionTitle}>Shop by category</Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={s.chips}>
+          {CATEGORIES.map(c => <TouchableOpacity key={c} onPress={() => setCategory(c)} style={[s.chip, category===c && s.chipActive]}><Text style={[s.chipText,category===c&&s.chipTextActive]}>{c}</Text></TouchableOpacity>)}
+        </ScrollView>
+        <Text style={s.sectionTitle}>Featured listings</Text>
+        <Text style={s.muted}>Sample listings for demonstration. Replace with verified live seller inventory before launch.</Text>
+        <View style={s.grid}>
+          {results.map(p => <View key={p.id} style={s.card}>
+            <View style={s.productArt}><Text style={s.emoji}>{p.emoji}</Text></View>
+            <View style={s.cardBody}>
+              <Text style={s.category}>{p.category.toUpperCase()}</Text>
+              <Text style={s.productTitle}>{p.title}</Text>
+              <Text style={s.price}>{p.price}</Text>
+              <Text style={s.location}>{p.location}</Text>
+              <TouchableOpacity style={s.outlineButton} onPress={() => setNotice("Listing enquiries will be enabled after seller accounts and a secure contact workflow are connected.")}><Text style={s.outlineText}>View / Enquire</Text></TouchableOpacity>
+            </View>
+          </View>)}
+        </View>
+        {results.length===0 && <Text style={s.empty}>No listings match your search.</Text>}
+      </> : <View style={s.formCard}>
+        <Text style={s.sectionTitle}>Start selling on G12</Text>
+        <Text style={s.muted}>Submit a draft listing. This demo does not publish listings to a server yet.</Text>
+        <Text style={s.label}>Listing title</Text>
+        <TextInput style={s.input} value={name} onChangeText={setName} placeholder="e.g. Brand new laptop"/>
+        <Text style={s.label}>Description</Text>
+        <TextInput style={[s.input,s.multiline]} value={description} onChangeText={setDescription} placeholder="Describe your product or service…" multiline/>
+        <TouchableOpacity style={s.primaryButton} onPress={() => setNotice(name.trim() && description.trim() ? "Draft received on this device only. Connect the backend and seller verification to publish listings." : "Please enter a title and description.")}><Text style={s.primaryText}>Save listing draft</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => setScreen("market")}><Text style={s.back}>← Back to marketplace</Text></TouchableOpacity>
+      </View>}
+      {!!notice && <Text accessibilityRole="alert" style={s.notice}>{notice}</Text>}
+      <View style={s.footer}><Text style={s.footerBrand}>G12 Market Hub</Text><Text style={s.footerText}>A marketplace connecting buyers, sellers and service providers.</Text><Text style={s.footerText}>Payments, delivery, accounts and seller verification must be configured before live commerce.</Text><Text style={s.copyright}>© {new Date().getFullYear()} G12 Market Hub</Text></View>
+    </ScrollView>
+  </SafeAreaView>;
+}
+
+const s = StyleSheet.create({
+ safe:{flex:1,backgroundColor:"#f5f7f6"}, header:{backgroundColor:"#075d2b",paddingHorizontal:20,paddingTop:12,paddingBottom:14},
+ brand:{fontSize:25,fontWeight:"900",color:"#ffd04a"},brandLight:{color:"#fff"},tagline:{color:"#d8f0e1",fontSize:10,letterSpacing:2,marginTop:3},
+ nav:{flexDirection:"row",gap:24,marginTop:15},navText:{color:"#fff",fontWeight:"700"},
+ content:{paddingBottom:20},hero:{backgroundColor:"#0b7a3b",padding:24,paddingTop:30},heroEyebrow:{color:"#ffd04a",fontWeight:"800",letterSpacing:2,fontSize:12},heroTitle:{color:"#fff",fontWeight:"900",fontSize:34,lineHeight:39,marginTop:10},heroCopy:{color:"#e8f5ed",fontSize:15,lineHeight:23,marginTop:14},goldButton:{alignSelf:"flex-start",backgroundColor:"#ffb400",paddingVertical:12,paddingHorizontal:16,borderRadius:8,marginTop:18},goldText:{fontWeight:"800",color:"#17201b"},
+ search:{backgroundColor:"#fff",borderWidth:1,borderColor:"#dce4df",borderRadius:10,padding:14,margin:18,fontSize:15},sectionTitle:{fontSize:23,fontWeight:"900",color:"#17201b",marginHorizontal:18,marginTop:10,marginBottom:8},chips:{paddingHorizontal:14,marginBottom:15},chip:{borderRadius:20,borderWidth:1,borderColor:"#d7e0da",backgroundColor:"#fff",paddingVertical:9,paddingHorizontal:14,marginHorizontal:4},chipActive:{backgroundColor:"#087a3d",borderColor:"#087a3d"},chipText:{color:"#314238",fontWeight:"600"},chipTextActive:{color:"#fff"},
+ muted:{color:"#66716b",fontSize:13,lineHeight:19,marginHorizontal:18,marginBottom:12},grid:{paddingHorizontal:14,flexDirection:"row",flexWrap:"wrap",justifyContent:"space-between"},card:{width:"48.5%",backgroundColor:"#fff",borderWidth:1,borderColor:"#e1e7e3",borderRadius:13,overflow:"hidden",marginBottom:14},productArt:{height:112,backgroundColor:"#e7f5ed",alignItems:"center",justifyContent:"center"},emoji:{fontSize:48},cardBody:{padding:11},category:{color:"#087a3d",fontSize:10,fontWeight:"800"},productTitle:{fontWeight:"800",fontSize:16,color:"#17201b",marginTop:5},price:{fontSize:16,fontWeight:"900",color:"#087a3d",marginTop:7},location:{fontSize:11,color:"#66716b",marginTop:5},outlineButton:{borderColor:"#087a3d",borderWidth:1,borderRadius:7,padding:9,alignItems:"center",marginTop:12},outlineText:{color:"#087a3d",fontWeight:"800",fontSize:12},empty:{textAlign:"center",padding:24,color:"#66716b"},
+ formCard:{backgroundColor:"#fff",margin:18,padding:20,borderRadius:14},label:{fontWeight:"700",color:"#26352c",marginTop:15,marginBottom:6},input:{borderWidth:1,borderColor:"#dce3df",borderRadius:8,padding:12,fontSize:15,backgroundColor:"#fff"},multiline:{height:120,textAlignVertical:"top"},primaryButton:{backgroundColor:"#087a3d",padding:14,borderRadius:8,alignItems:"center",marginTop:18},primaryText:{color:"#fff",fontWeight:"800"},back:{color:"#087a3d",fontWeight:"700",marginTop:18},notice:{backgroundColor:"#fff8df",color:"#6a4b00",marginHorizontal:18,marginVertical:10,padding:13,borderRadius:8,lineHeight:20},footer:{backgroundColor:"#06150d",padding:22,marginTop:25},footerBrand:{color:"#7ee2a8",fontSize:19,fontWeight:"900"},footerText:{color:"#c0cec6",fontSize:12,lineHeight:19,marginTop:9},copyright:{color:"#93a49b",fontSize:11,textAlign:"center",marginTop:20}
+});
