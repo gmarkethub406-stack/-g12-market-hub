@@ -74,3 +74,931 @@ u<div class="card" style="margin-bottom:20px">
 
 <div class="card"><h3>🛠️ Services</h3><p class="muted">Find professionals and businesses near you.</p><a class="btn" href="#">Browse</a></div>
 </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>G12 Market Hub — Buy • Sell • Build • Connect</title>
+
+  <meta name="description" content="G12 Market Hub — discover products, services and digital solutions. Buy, sell and connect with trusted sellers.">
+  <meta name="theme-color" content="#0b7a3b">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f7f6;
+      color: #17201b;
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .topbar {
+      background: #075d2b;
+      color: white;
+      text-align: center;
+      padding: 8px 15px;
+      font-size: 13px;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e9e7;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 900;
+      color: #087a3d;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: #17201b;
+    }
+
+    .search {
+      flex: 1;
+      display: flex;
+      background: #f1f4f2;
+      border: 1px solid #dfe5e1;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .search input {
+      width: 100%;
+      border: 0;
+      outline: none;
+      background: transparent;
+      padding: 13px 15px;
+    }
+
+    .search button {
+      border: 0;
+      background: #0b7a3b;
+      color: white;
+      padding: 0 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .sell-btn {
+      background: #ffb400;
+      color: #17201b;
+      padding: 11px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #075d2b, #0b8b46);
+      color: white;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 70px 20px;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: #ffd04a;
+    }
+
+    .hero p {
+      max-width: 650px;
+      font-size: 18px;
+      color: #e7f6ed;
+      margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      display: inline-block;
+      padding: 13px 20px;
+      border-radius: 9px;
+      font-weight: bold;
+    }
+
+    .primary-btn {
+      background: #ffb400;
+      color: #17201b;
+    }
+
+    .secondary-btn {
+      border: 1px solid rgba(255,255,255,.5);
+      color: white;
+    }
+
+    .hero-card {
+      background: white;
+      color: #17201b;
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.15);
+    }
+
+    .hero-card h3 {
+      color: #087a3d;
+      margin-bottom: 12px;
+    }
+
+    .hero-card p {
+      color: #58645e;
+      font-size: 15px;
+      margin-bottom: 0;
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 50px 20px;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .section-heading h2 {
+      font-size: 30px;
+    }
+
+    .section-heading p {
+      color: #66716b;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px;
+    }
+
+    .category {
+      background: white;
+      border: 1px solid #e1e7e3;
+      border-radius: 12px;
+      padding: 20px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .category:hover {
+      transform: translateY(-3px);
+      border-color: #0b7a3b;
+    }
+
+    .category-icon {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .category strong {
+      font-size: 14px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .filters input,
+    .filters select {
+      padding: 11px 13px;
+      border: 1px solid #dce3df;
+      border-radius: 8px;
+      background: white;
+      outline: none;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .product {
+      background: white;
+      border: 1px solid #e1e7e3;
+      border-radius: 14px;
+      overflow: hidden;
+      transition: .2s;
+    }
+
+    .product:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,.08);
+    }
+
+    .product-image {
+      height: 180px;
+      background: linear-gradient(135deg, #e7f5ed, #d7eee1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 55px;
+    }
+
+    .product-body {
+      padding: 16px;
+    }
+
+    .product-category {
+      color: #0b7a3b;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .product h3 {
+      margin: 6px 0;
+      font-size: 17px;
+    }
+
+    .price {
+      color: #087a3d;
+      font-size: 19px;
+      font-weight: 900;
+      margin: 8px 0 14px;
+    }
+
+    .enquire {
+      width: 100%;
+      border: 0;
+      background: #087a3d;
+      color: white;
+      padding: 11px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .seller {
+      background: #10231a;
+      color: white;
+      border-radius: 18px;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .seller h2 {
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    .seller p {
+      color: #cbd8d1;
+    }
+
+    .seller-form {
+      background: white;
+      color: #17201b;
+      padding: 25px;
+      border-radius: 14px;
+    }
+
+    .seller-form input,
+    .seller-form textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #dce3df;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      outline: none;
+    }
+
+    .seller-form textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .seller-form button {
+      width: 100%;
+      background: #087a3d;
+      color: white;
+      border: 0;
+      padding: 13px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    footer {
+      background: #06150d;
+      color: white;
+      margin-top: 50px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 30px;
+    }
+
+    footer h3 {
+      color: #7ee2a8;
+      margin-bottom: 10px;
+    }
+
+    footer p,
+    footer a {
+      color: #b9c8c0;
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .copyright {
+      border-top: 1px solid #193126;
+      text-align: center;
+      padding: 18px;
+      color: #93a49b;
+      font-size: 13px;
+    }
+
+    .empty {
+      display: none;
+      padding: 30px;
+      text-align: center;
+      background: white;
+      border-radius: 12px;
+      color: #66716b;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner,
+      .seller {
+        grid-template-columns: 1fr;
+      }
+
+      .categories {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        flex-wrap: wrap;
+      }
+
+      .logo {
+        width: 100%;
+      }
+
+      .search {
+        order: 3;
+        flex-basis: 100%;
+      }
+
+      .sell-btn {
+        margin-left: auto;
+      }
+
+      .hero-inner {
+        padding: 50px 20px;
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .seller {
+        padding: 25px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    🚀 Welcome to G12 Market Hub — Buy • Sell • Build • Connect
+  </div>
+
+  <header>
+    <nav class="nav">
+
+      <a href="#" class="logo">
+        G12 <span>Market Hub</span>
+      </a>
+
+      <div class="search">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search products, services or categories..."
+          oninput="searchProducts()"
+        >
+        <button onclick="searchProducts()">Search</button>
+      </div>
+
+      <a class="sell-btn" href="#sell">Sell on G12</a>
+
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="hero-inner">
+
+        <div>
+          <h1>
+            Everything you need.<br>
+            <span>One marketplace.</span>
+          </h1>
+
+          <p>
+            Discover products, services and digital solutions on G12 Market Hub.
+            Find what you need, connect with sellers and grow your business.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#market" class="primary-btn">Shop the Market</a>
+            <a href="#sell" class="secondary-btn">Become a Seller</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <h3>🛍️ G12 Marketplace</h3>
+          <p>
+            Electronics, fashion, cars and parts, property, agriculture,
+            home products and professional services — all in one place.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <section class="section">
+
+      <div class="section-heading">
+        <div>
+          <h2>Shop by Category</h2>
+          <p>Explore the G12 Market</p>
+        </div>
+      </div>
+
+      <div class="categories">
+
+        <div class="category" onclick="filterCategory('Electronics')">
+          <div class="category-icon">📱</div>
+          <strong>Electronics</strong>
+        </div>
+
+        <div class="category" onclick="filterCategory('Fashion')">
+          <div class="category-icon">👕</div>
+          <strong>Fashion</strong>
+        </div>
+
+        <div class="category" onclick="filterCategory('Cars')">
+          <div class="category-icon">🚗</div>
+          <strong>Cars & Parts</strong>
+        </div>
+
+        <div class="category" onclick="filterCategory('Home')">
+          <div class="category-icon">🏠</div>
+          <strong>Home</strong>
+        </div>
+
+        <div class="category" onclick="filterCategory('Agriculture')">
+          <div class="category-icon">🌾</div>
+          <strong>Agriculture</strong>
+        </div>
+
+        <div class="category" onclick="filterCategory('Property')">
+          <div class="category-icon">🏘️</div>
+          <strong>Property</strong>
+        </div>
+
+        <div class="category" onclick="filterCategory('Services')">
+          <div class="category-icon">🛠️</div>
+          <strong>Services</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="section" id="market">
+
+      <div class="section-heading">
+        <div>
+          <h2>G12 Marketplace</h2>
+          <p>Featured products and services</p>
+        </div>
+      </div>
+
+      <div class="filters">
+
+        <input
+          type="text"
+          id="marketSearch"
+          placeholder="Search the marketplace..."
+          oninput="searchProducts()"
+        >
+
+        <select id="sortSelect" onchange="sortProducts()">
+          <option value="default">Sort by</option>
+          <option value="low">Price: Low to High</option>
+          <option value="high">Price: High to Low</option>
+        </select>
+
+      </div>
+
+      <div class="products" id="products">
+
+        <article class="product" data-name="Smartphone Accessories" data-category="Electronics" data-price="250000">
+          <div class="product-image">📱</div>
+          <div class="product-body">
+            <div class="product-category">Electronics</div>
+            <h3>Smartphone & Accessories</h3>
+            <div class="price">₦250,000</div>
+            <button class="enquire" onclick="enquire('Smartphone & Accessories')">Enquire</button>
+          </div>
+        </article>
+
+        <article class="product" data-name="Laptop Computer" data-category="Electronics" data-price="480000">
+          <div class="product-image">💻</div>
+          <div class="product-body">
+            <div class="product-category">Electronics</div>
+            <h3>Laptop & Computer</h3>
+            <div class="price">₦480,000</div>
+            <button class="enquire" onclick="enquire('Laptop & Computer')">Enquire</button>
+          </div>
+        </article>
+
+        <article class="product" data-name="Fashion Collection" data-category="Fashion" data-price="45000">
+          <div class="product-image">👕</div>
+          <div class="product-body">
+            <div class="product-category">Fashion</div>
+            <h3>Fashion Collection</h3>
+            <div class="price">₦45,000</div>
+            <button class="enquire" onclick="enquire('Fashion Collection')">Enquire</button>
+          </div>
+        </article>
+
+        <article class="product" data-name="Auto Parts" data-category="Cars" data-price="85000">
+          <div class="product-image">🚗</div>
+          <div class="product-body">
+            <div class="product-category">Cars & Parts</div>
+            <h3>Auto Parts</h3>
+            <div class="price">₦85,000</div>
+            <button class="enquire" onclick="enquire('Auto Parts')">Enquire</button>
+          </div>
+        </article>
+
+        <article class="product" data-name="Home Appliances" data-category="Home" data-price="120000">
+          <div class="product-image">🏠</div>
+          <div class="product-body">
+            <div class="product-category">Home</div>
+            <h3>Home Appliances</h3>
+            <div class="price">₦120,000</div>
+            <button class="enquire" onclick="enquire('Home Appliances')">Enquire</button>
+          </div>
+        </article>
+
+        <article class="product" data-name="Farm Produce" data-category="Agriculture" data-price="35000">
+          <div class="product-image">🌾</div>
+          <div class="product-body">
+            <div class="product-category">Agriculture</div>
+            <h3>Farm Produce</h3>
+            <div class="price">₦35,000</div>
+            <button class="enquire" onclick="enquire('Farm Produce')">Enquire</button>
+          </div>
+        </article>
+
+        <article class="product" data-name="Land Property" data-category="Property" data-price="5000000">
+          <div class="product-image">🏘️</div>
+          <div class="product-body">
+            <div class="product-category">Property</div>
+            <h3>Land & Property</h3>
+            <div class="price">₦5,000,000</div>
+            <button class="enquire" onclick="enquire('Land & Property')">Enquire</button>
+          </div>
+        </article>
+
+        <article class="product" data-name="Professional Services" data-category="Services" data-price="50000">
+          <div class="product-image">🛠️</div>
+          <div class="product-body">
+            <div class="product-category">Services</div>
+            <h3>Professional Services</h3>
+            <div class="price">₦50,000</div>
+            <button class="enquire" onclick="enquire('Professional Services')">Enquire</button>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="empty" id="empty">
+        No products found. Try another search.
+      </div>
+
+    </section>
+
+
+    <section class="section" id="sell">
+
+      <div class="seller">
+
+        <div>
+          <h2>Sell on G12 Market Hub</h2>
+
+          <p>
+            Have products or services to sell?
+            Join the G12 marketplace and connect with potential customers.
+          </p>
+
+          <br>
+
+          <p>
+            Submit your business information and our team can contact you
+            about getting started.
+          </p>
+        </div>
+
+        <div class="seller-form">
+
+          <input id="sellerName" type="text" placeholder="Your name">
+
+          <input id="sellerBusiness" type="text" placeholder="Business name">
+
+          <input id="sellerPhone" type="tel" placeholder="Phone / WhatsApp">
+
+          <textarea id="sellerProduct" placeholder="What do you want to sell?"></textarea>
+
+          <button onclick="sellerRequest()">
+            Submit Seller Request
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
+    <div class="footer-inner">
+
+      <div>
+        <h3>G12 Market Hub</h3>
+        <p>
+          Buy • Sell • Build • Connect
+        </p>
+        <p>
+          Discover products, services and digital solutions.
+        </p>
+      </div>
+
+      <div>
+        <h3>Marketplace</h3>
+        <a href="#market">Shop</a>
+        <a href="#sell">Sell on G12</a>
+        <a href="#market">Categories</a>
+      </div>
+
+      <div>
+        <h3>Contact</h3>
+        <a href="mailto:gmarkethub406@gmail.com">
+          gmarkethub406@gmail.com
+        </a>
+
+        <a
+          href="https://wa.me/2348122045380"
+          target="_blank"
+          rel="noopener"
+        >
+          WhatsApp: 08122045380
+        </a>
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 G12 Market Hub. All rights reserved.
+    </div>
+
+  </footer>
+
+
+  <script>
+
+    function enquire(product) {
+
+      const message =
+        "Hello G12 Market Hub, I am interested in: " + product;
+
+      const url =
+        "https://wa.me/2348122045380?text=" +
+        encodeURIComponent(message);
+
+      window.open(url, "_blank");
+    }
+
+
+    function sellerRequest() {
+
+      const name =
+        document.getElementById("sellerName").value.trim();
+
+      const business =
+        document.getElementById("sellerBusiness").value.trim();
+
+      const phone =
+        document.getElementById("sellerPhone").value.trim();
+
+      const product =
+        document.getElementById("sellerProduct").value.trim();
+
+      if (!name || !phone || !product) {
+        alert("Please enter your name, phone number and what you want to sell.");
+        return;
+      }
+
+      const message =
+        "G12 Market Hub Seller Request%0A%0A" +
+        "Name: " + encodeURIComponent(name) +
+        "%0ABusiness: " + encodeURIComponent(business) +
+        "%0APhone: " + encodeURIComponent(phone) +
+        "%0AProduct/Service: " + encodeURIComponent(product);
+
+      window.open(
+        "https://wa.me/2348122045380?text=" + message,
+        "_blank"
+      );
+    }
+
+
+    function searchProducts() {
+
+      const search1 =
+        document.getElementById("searchInput").value.toLowerCase();
+
+      const search2 =
+        document.getElementById("marketSearch").value.toLowerCase();
+
+      const query =
+        (search1 + " " + search2).trim();
+
+      const products =
+        document.querySelectorAll(".product");
+
+      let found = 0;
+
+      products.forEach(product => {
+
+        const text =
+          (
+            product.dataset.name +
+            " " +
+            product.dataset.category
+          ).toLowerCase();
+
+        if (text.includes(query)) {
+          product.style.display = "";
+          found++;
+        } else {
+          product.style.display = "none";
+        }
+
+      });
+
+      document.getElementById("empty").style.display =
+        found === 0 ? "block" : "none";
+    }
+
+
+    function filterCategory(category) {
+
+      document.getElementById("marketSearch").value = category;
+
+      document.getElementById("searchInput").value = "";
+
+      searchProducts();
+
+      document.getElementById("market").scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+
+    function sortProducts() {
+
+      const container =
+        document.getElementById("products");
+
+      const products =
+        Array.from(container.querySelectorAll(".product"));
+
+      const sort =
+        document.getElementById("sortSelect").value;
+
+      if (sort === "low") {
+
+        products.sort(
+          (a, b) =>
+            Number(a.dataset.price) -
+            Number(b.dataset.price)
+        );
+
+      }
+
+      if (sort === "high") {
+
+        products.sort(
+          (a, b) =>
+            Number(b.dataset.price) -
+            Number(a.dataset.price)
+        );
+
+      }
+
+      products.forEach(product =>
+        container.appendChild(product)
+      );
+    }
+
+  </script>
+
+</body>
+</html>
