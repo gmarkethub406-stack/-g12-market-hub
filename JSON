@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "G12 Market Hub",
+    "slug": "g12-market-hub",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.g12markethub.app"
+    },
+    "android": {
+      "package": "com.g12markethub.app"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    }
+  }
+}
